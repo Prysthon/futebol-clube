@@ -23,4 +23,9 @@ const teamsMock: Teams[] = [
   }
 ] as Teams[];
 
-export default teamsMock;
+const teamMock = {
+  "id": 1,
+  "teamName": "Avaí/Kindermann"
+} as Teams;
+
+export {teamsMock, teamMock};
