@@ -14,7 +14,6 @@ export default class TeamController {
   }
 
   async findById(req: Request, res: Response) {
-    // console.log('TESTEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n',req.params.id)
     const result = await this._service.findById(Number(req.params.id));
     return res.status(200).json(result);
   }
