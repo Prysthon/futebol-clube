@@ -18,4 +18,10 @@ matchesRouter.patch(
   (req: Request, res: Response) => matchesController.updateInProgress(req, res),
 );
 
+matchesRouter.patch(
+  '/:id',
+  auth.verifyToken,
+  (req: Request, res: Response) => matchesController.updateMatch(req, res),
+);
+
 export default matchesRouter;
