@@ -5,4 +5,10 @@ export default interface IMatchesService {
   findAllInProgress(inProgress: boolean): Promise<IMatches[]>,
   updateInProgress(id: number): Promise<void>,
   updateMatch(id: number, homeTeamGoals: number, awayTeamGoals: number): Promise<void>
+  createMatch(
+    homeTeamId: number,
+    awayTeamId: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ): Promise<IMatches>
 }
