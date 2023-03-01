@@ -26,7 +26,7 @@ export default class UsersService implements IUsersService {
 
     if (!await bcrypt.compare(user.password, userFound.password)) return error;
 
-    const token = this._jwt.createToken({ email: user.email });
+    const token = this._jwt.createToken({ role: userFound.role });
     return { type: null, payload: token };
   }
 }

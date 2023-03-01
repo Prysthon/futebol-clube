@@ -13,4 +13,9 @@ export default class UsersController {
     if (type) return res.status(401).json({ message: payload });
     return res.status(200).json({ token: payload });
   }
+
+  static async userRole(req: Request, res: Response) {
+    const { role } = req.body;
+    return res.status(200).json(role);
+  }
 }

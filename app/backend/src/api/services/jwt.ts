@@ -9,9 +9,4 @@ export default class jwtToken {
     const token = jwt.sign(email, this._secret);
     return token;
   }
-
-  decodeToken(token: string): IPayload {
-    const decodedToken = jwt.verify(token, this._secret) as IPayload;
-    return decodedToken;
-  }
 }
