@@ -27,4 +27,21 @@ const userWithoutPasswordMock = {
 
 const missingFields = { "message": "All fields must be filled" }
 
-export { userMock, userCompleteMock, tokenMock, userWithoutEmailMock, userWithoutPasswordMock, missingFields };
+const wrongEmail = {
+  "email": '@exemplo.com',
+  "password": "123tiago123"
+} as Users;
+
+const wrongPassword = {
+  "email": "tiago@gmail.com",
+  "password": "123"
+} as Users;
+
+const infNotInserted = {
+  "email": "fake@gmail.com",
+  "password": "fakeqweqwe"
+} as Users;
+
+const wrongFields =   { "message": "Invalid email or password" }
+
+export { userMock, userCompleteMock, tokenMock, userWithoutEmailMock, userWithoutPasswordMock, missingFields, wrongEmail, wrongPassword, infNotInserted, wrongFields };

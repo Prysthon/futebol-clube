@@ -9,7 +9,8 @@ export default class UsersController {
   }
 
   async validateLogin(req: Request, res: Response) {
-    const result = await this._service.validateLogin(req.body);
-    return res.status(200).json({ token: result });
+    const { type, payload } = await this._service.validateLogin(req.body);
+    if (type) return res.status(401).json({ message: payload });
+    return res.status(200).json({ token: payload });
   }
 }
