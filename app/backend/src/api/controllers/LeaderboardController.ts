@@ -16,19 +16,23 @@ export default class LeaderboardController {
 
   static async calculatePoints(req: Request, res: Response) {
     const teams = await teamService.findAll();
-    const matches = await matchesService.findAll();
+    const allMatches = await matchesService.findAll();
 
-    const matchesWithVictories = matches.map((match) => {
-      if (match.homeTeamGoals > match.awayTeamGoals) {
-        return { ...match, victory: match.homeTeamId };
+    const matches = allMatches.filter(({ inProgress }) => inProgress === false);
+
+    const matchesWithVictories = matches.map(({ dataValues }) => {
+      if (dataValues.homeTeamGoals > dataValues.awayTeamGoals) {
+        return { ...dataValues, victory: dataValues.homeTeamId };
       }
-      if (match.awayTeamGoals > match.homeTeamGoals) {
-        return { ...match, victory: match.awayTeamId };
-      }
-      return { ...match, victory: 0 };
+      return { ...dataValues, victory: 0 };
     });
 
     const result = LeaderboardService.calculatePoints(teams, matchesWithVictories);
-    return res.status(200).json(result);
+    const sortered = result.sort((a, b) => b.totalPoints - a.totalPoints
+    || b.totalVictories - a.totalVictories
+    || b.goalsBalance - a.goalsBalance
+    || b.goalsFavor - a.goalsFavor
+    || b.goalsOwn - a.goalsOwn);
+    return res.status(200).json(sortered);
   }
 }
