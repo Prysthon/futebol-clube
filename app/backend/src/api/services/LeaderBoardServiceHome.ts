@@ -1,7 +1,7 @@
 import IMatches from '../interfaces/IMatches';
 import ITeam from '../interfaces/ITeams';
 
-export default class LeaderboardService {
+export default class LeaderboardServiceHome {
   public static totalPointsAndVictories(id: number, matches: IMatches[]): number[] {
     let totalPoints = 0;
     let totalVictories = 0;
@@ -58,13 +58,13 @@ export default class LeaderboardService {
     return [goalsFavor, goalsOwn];
   }
 
-  public static calculatePoints(teams: ITeam[], matchesWithVictories: IMatches[]) {
+  public static calculatePoints(teams: ITeam[], matches: IMatches[]) {
     const result = teams.map(({ id, teamName }) => {
-      const totalPoints = LeaderboardService
-        .totalPointsAndVictories(id as number, matchesWithVictories);
-      const totalGames = LeaderboardService.totalGames(id as number, matchesWithVictories);
-      const losesDraws = LeaderboardService.totalLossesAndDraws(id as number, matchesWithVictories);
-      const goals = LeaderboardService.goalsFavor(id as number, matchesWithVictories);
+      const totalPoints = LeaderboardServiceHome
+        .totalPointsAndVictories(id as number, matches);
+      const totalGames = LeaderboardServiceHome.totalGames(id as number, matches);
+      const losesDraws = LeaderboardServiceHome.totalLossesAndDraws(id as number, matches);
+      const goals = LeaderboardServiceHome.goalsFavor(id as number, matches);
       return { name: teamName,
         totalPoints: totalPoints[0] + losesDraws[1],
         totalGames,

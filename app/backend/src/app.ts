@@ -1,5 +1,6 @@
 import * as express from 'express';
-import leaderboardRouter from './api/routes/leaderboardRoute';
+import leaderboardRouterHome from './api/routes/leaderboardRouteHome';
+import leaderboardRouterAway from './api/routes/leaderboardRouteAway';
 import matchesRouter from './api/routes/matchesRoute';
 import teamsRoutes from './api/routes/teamsRoute';
 import usersRouter from './api/routes/usersRoute';
@@ -37,7 +38,8 @@ class App {
     this.app.use('/teams', teamsRoutes);
     this.app.use('/login', usersRouter);
     this.app.use('/matches', matchesRouter);
-    this.app.use('/leaderboard/home', leaderboardRouter);
+    this.app.use('/leaderboard/home', leaderboardRouterHome);
+    this.app.use('/leaderboard/away', leaderboardRouterAway);
   }
 }
 

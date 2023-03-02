@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import ITeamService from '../interfaces/ITeamsServices';
-import LeaderboardService from '../services/LeaderBoardService';
+import LeaderboardServiceHome from '../services/LeaderBoardServiceHome';
 import MatchesService from '../services/MatchesService';
 import TeamService from '../services/TeamsService';
 
 const teamService = new TeamService();
 const matchesService = new MatchesService();
 
-export default class LeaderboardController {
+export default class LeaderboardControllerHome {
   private _service: ITeamService;
 
   constructor(service: ITeamService) {
@@ -27,7 +27,7 @@ export default class LeaderboardController {
       return { ...dataValues, victory: 0 };
     });
 
-    const result = LeaderboardService.calculatePoints(teams, matchesWithVictories);
+    const result = LeaderboardServiceHome.calculatePoints(teams, matchesWithVictories);
     const sortered = result.sort((a, b) => b.totalPoints - a.totalPoints
     || b.totalVictories - a.totalVictories
     || b.goalsBalance - a.goalsBalance
